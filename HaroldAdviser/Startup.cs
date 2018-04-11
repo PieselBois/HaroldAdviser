@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
+using NLog.Extensions.Logging;
+using NLog.Web;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -82,7 +85,7 @@ namespace HaroldAdviser
         });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -97,6 +100,10 @@ namespace HaroldAdviser
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
+
+            loggerFactory.AddNLog();
+
+            env.ConfigureNLog("nlog.config");
         }
     }
 }
