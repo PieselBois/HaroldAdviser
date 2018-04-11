@@ -6,6 +6,6 @@ install:
 - dotnet restore
 script:
 - dotnet build
-- dotnet test HaroldAdviser.Tests/
+- dotnet test HaroldAdviser/HaroldAdviser.Tests/
 notifications:
 email: false
