@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using HaroldAdviser.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -29,7 +32,6 @@ namespace HaroldAdviser
             if (env.IsDevelopment())
             {
                 builder.AddApplicationInsightsSettings(true);
-                builder.AddUserSecrets<Startup>();
             }
 
             Configuration = builder.Build();
@@ -40,6 +42,17 @@ namespace HaroldAdviser
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
+
+            var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new ApplicationException("Can not found connections string. Please add 'ConnectionString' environment variable.");
+            }
+
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseNpgsql(connectionString,
+                    b => b.MigrationsAssembly("HaroldAdviser")));
 
             services.AddMvc();
 
@@ -60,11 +73,12 @@ namespace HaroldAdviser
             options.TokenEndpoint = "https://github.com/login/oauth/access_token";
             options.UserInformationEndpoint = "https://api.github.com/user";
 
+            options.SaveTokens = true;
+
             options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "id");
             options.ClaimActions.MapJsonKey(ClaimTypes.Name, "name");
             options.ClaimActions.MapJsonKey("urn:github:login", "login");
             options.ClaimActions.MapJsonKey("urn:github:url", "html_url");
-            //options.ClaimActions.MapJsonKey("urn:github:avatar", "avatar_url");
 
             options.Events = new OAuthEvents
             {

@@ -1,7 +1,7 @@
 ﻿@model HaroldAdviser.Models.GithubUser
 @if (User.Identity.IsAuthenticated)
 {
-    <a href="#" class="btn btn-primary" role="button">Hello, @Model.Login </a>
+    <a href="@Url.Action("Page", "User")" class="btn btn-primary" role="button">Hello, @Model.Login </a>
 }
 else
 {
