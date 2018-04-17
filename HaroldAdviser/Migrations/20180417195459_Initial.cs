@@ -23,7 +23,7 @@ namespace HaroldAdviser.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Logs",
+                name: "Warnings",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -35,9 +35,9 @@ namespace HaroldAdviser.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Logs", x => x.Id);
+                    table.PrimaryKey("PK_Warnings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Logs_Repositories_RepositoryId",
+                        name: "FK_Warnings_Repositories_RepositoryId",
                         column: x => x.RepositoryId,
                         principalTable: "Repositories",
                         principalColumn: "Id",
@@ -45,15 +45,15 @@ namespace HaroldAdviser.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Logs_RepositoryId",
-                table: "Logs",
+                name: "IX_Warnings_RepositoryId",
+                table: "Warnings",
                 column: "RepositoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Logs");
+                name: "Warnings");
 
             migrationBuilder.DropTable(
                 name: "Repositories");

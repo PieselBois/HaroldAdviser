@@ -17,6 +17,6 @@ namespace HaroldAdviser.Models
 
         public string Token { get; set; }
 
-        public IList<LogModel> Logs { get; set; }
+        public IList<Warning> Warnings { get; set; }
     }
 }

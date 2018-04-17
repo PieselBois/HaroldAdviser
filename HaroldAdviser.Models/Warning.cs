@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HaroldAdviser.Models
 {
-    public class LogModel
+    public class Warning
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]

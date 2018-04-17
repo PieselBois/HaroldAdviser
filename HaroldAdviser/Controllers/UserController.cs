@@ -1,9 +1,6 @@
 ﻿using HaroldAdviser.Models;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Octokit;
-using Octokit.Internal;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,16 +31,13 @@ namespace HaroldAdviser.Controllers
         public async Task<IActionResult> SyncRepositories()
         {
             var user = GetUser();
-            var accessToken = HttpContext.GetTokenAsync("access_token").Result;
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var github = new GitHubClient(new ProductHeaderValue("AspNetCoreGitHubAuth"),
-                new InMemoryCredentialStore(new Credentials(accessToken)));
-            var repositories = await github.Repository.GetAllForUser(user.Login);
+            var repositories = await GetRepositories();
 
             foreach (var repository in repositories)
             {

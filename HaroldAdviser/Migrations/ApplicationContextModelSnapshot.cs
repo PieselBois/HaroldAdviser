@@ -20,7 +20,23 @@ namespace HaroldAdviser.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
-            modelBuilder.Entity("HaroldAdviser.Models.LogModel", b =>
+            modelBuilder.Entity("HaroldAdviser.Models.Repository", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Token");
+
+                    b.Property<string>("Url");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Repositories");
+                });
+
+            modelBuilder.Entity("HaroldAdviser.Models.Warning", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -39,29 +55,13 @@ namespace HaroldAdviser.Migrations
 
                     b.HasIndex("RepositoryId");
 
-                    b.ToTable("Logs");
+                    b.ToTable("Warnings");
                 });
 
-            modelBuilder.Entity("HaroldAdviser.Models.Repository", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Token");
-
-                    b.Property<string>("Url");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Repositories");
-                });
-
-            modelBuilder.Entity("HaroldAdviser.Models.LogModel", b =>
+            modelBuilder.Entity("HaroldAdviser.Models.Warning", b =>
                 {
                     b.HasOne("HaroldAdviser.Models.Repository")
-                        .WithMany("Logs")
+                        .WithMany("Warnings")
                         .HasForeignKey("RepositoryId");
                 });
 #pragma warning restore 612, 618

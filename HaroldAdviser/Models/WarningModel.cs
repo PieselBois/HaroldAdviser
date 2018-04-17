@@ -2,7 +2,7 @@
 
 namespace HaroldAdviser.Models
 {
-    public class ErrorInfo
+    public class WarningModel
     {
         [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
