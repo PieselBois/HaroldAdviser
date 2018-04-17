@@ -10,7 +10,6 @@ namespace HaroldAdviser.Models
         public ApplicationContext(DbContextOptions options)
             : base(options)
         {
-
         }
     }
 }
