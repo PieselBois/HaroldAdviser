@@ -1,10 +1,10 @@
-﻿using HaroldAdviser.Models;
+﻿using HaroldAdviser.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Repository = HaroldAdviser.Models.Repository;
+using Repository = HaroldAdviser.Data.Repository;
 
 namespace HaroldAdviser.Controllers
 {

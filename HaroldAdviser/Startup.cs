@@ -1,4 +1,4 @@
-﻿using HaroldAdviser.Models;
+﻿using HaroldAdviser.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth;
@@ -44,6 +44,8 @@ namespace HaroldAdviser
             services.AddOptions();
 
             var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+            var githubClientId = Environment.GetEnvironmentVariable("GITHUB_CLIENT_ID");
+            var githubClientSecret = Environment.GetEnvironmentVariable("GITHUB_CLIENT_SECRET");
 
             if (string.IsNullOrEmpty(connectionString))
             {
@@ -65,8 +67,8 @@ namespace HaroldAdviser
         .AddCookie()
         .AddOAuth("GitHub", options =>
         {
-            options.ClientId = Configuration["GitHub:ClientId"];
-            options.ClientSecret = Configuration["GitHub:ClientSecret"];
+            options.ClientId = githubClientId;
+            options.ClientSecret = githubClientSecret;
             options.CallbackPath = new PathString("/signin-github");
 
             options.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";

@@ -36,8 +36,7 @@ namespace HaroldAdviser.Controllers
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var github = new GitHubClient(new ProductHeaderValue("AspNetCoreGitHubAuth"),
                 new InMemoryCredentialStore(new Credentials(accessToken)));
-            var repositories = await github.Repository.GetAllForUser(user.Login);
-            return repositories;
+            return await github.Repository.GetAllForUser(user.Login);
         }
     }
 }

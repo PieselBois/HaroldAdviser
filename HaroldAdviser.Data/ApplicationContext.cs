@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace HaroldAdviser.Models
+namespace HaroldAdviser.Data
 {
     public class ApplicationContext : DbContext
     {

@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HaroldAdviser.Models\HaroldAdviser.Models.csproj" />
+    <ProjectReference Include="..\HaroldAdviser.Data\HaroldAdviser.Data.csproj" />
   </ItemGroup>
 
 </Project>

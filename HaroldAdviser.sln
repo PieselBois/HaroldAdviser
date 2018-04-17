@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaroldAdviser", "HaroldAdvi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaroldAdviser.Tests", "HaroldAdviser.Tests\HaroldAdviser.Tests.csproj", "{968219A1-7818-4BCE-B498-4DBE7FC287C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaroldAdviser.Models", "HaroldAdviser.Models\HaroldAdviser.Models.csproj", "{DDFDAE91-A677-4D6C-98FE-453207D21DC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaroldAdviser.Data", "HaroldAdviser.Data\HaroldAdviser.Data.csproj", "{DDFDAE91-A677-4D6C-98FE-453207D21DC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

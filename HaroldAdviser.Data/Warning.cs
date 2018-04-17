@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HaroldAdviser.Models
+namespace HaroldAdviser.Data
 {
     public class Warning
     {
