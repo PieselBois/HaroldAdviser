@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaroldAdviser", "HaroldAdvi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaroldAdviser.Tests", "HaroldAdviser.Tests\HaroldAdviser.Tests.csproj", "{968219A1-7818-4BCE-B498-4DBE7FC287C7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaroldAdviser.Data", "HaroldAdviser.Data\HaroldAdviser.Data.csproj", "{DDFDAE91-A677-4D6C-98FE-453207D21DC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{968219A1-7818-4BCE-B498-4DBE7FC287C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{968219A1-7818-4BCE-B498-4DBE7FC287C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{968219A1-7818-4BCE-B498-4DBE7FC287C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDFDAE91-A677-4D6C-98FE-453207D21DC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDFDAE91-A677-4D6C-98FE-453207D21DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDFDAE91-A677-4D6C-98FE-453207D21DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDFDAE91-A677-4D6C-98FE-453207D21DC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
