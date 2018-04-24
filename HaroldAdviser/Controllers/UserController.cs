@@ -32,9 +32,9 @@ namespace HaroldAdviser.Controllers
             return View();
         }
 
-        public static GoogleCredential GetCredential()
+        public async Task<GoogleCredential> GetCredential()
         {
-            var credential = Task.Run(GoogleCredential.GetApplicationDefaultAsync).Result;
+            var credential = await GoogleCredential.GetApplicationDefaultAsync();
             if (credential.IsCreateScopedRequired)
             {
                 credential = credential.CreateScoped("https://www.googleapis.com/auth/cloud-platform");
@@ -42,71 +42,68 @@ namespace HaroldAdviser.Controllers
             return credential;
         }
 
-        public void CreateInstance()
+        protected async void CreateInstance()
         {
             var computeService = new ComputeService(new BaseClientService.Initializer
             {
-                HttpClientInitializer = GetCredential(),
+                HttpClientInitializer = await GetCredential(),
                 ApplicationName = "Google-ComputeSample/0.1",
             });
 
-            // Project ID for this request.
-            var project = "haroldci-195817";  // TODO: Update placeholder value.
+            var project = "haroldci-195817";
 
-            // The name of the zone for this request.
-            var zone = "europe-west3-b";  // TODO: Update placeholder value.
+            var zone = "europe-west3-b";
 
-            // TODO: Assign values to desired properties of `requestBody`:
-            var requestBody = new DataCloud.Instance();
-            requestBody.Name = "foo";
-            requestBody.MachineType =
-                "https://www.googleapis.com/compute/v1/projects/" + project + "/zones/" + zone + "/machineTypes/f1-micro";
-            requestBody.NetworkInterfaces = new List<DataCloud.NetworkInterface>
+            var requestBody = new DataCloud.Instance
             {
-                new DataCloud.NetworkInterface
+                Name = "foo",
+                MachineType = "https://www.googleapis.com/compute/v1/projects/" + project + "/zones/" + zone +
+                              "/machineTypes/f1-micro",
+                NetworkInterfaces = new List<DataCloud.NetworkInterface>
                 {
-                    Network = "https://www.googleapis.com/compute/v1/projects/" + project + "/global/networks/default",
-                    AccessConfigs = new List<DataCloud.AccessConfig>
+                    new DataCloud.NetworkInterface
                     {
-                        new DataCloud.AccessConfig
+                        Network = "https://www.googleapis.com/compute/v1/projects/" + project +
+                                  "/global/networks/default",
+                        AccessConfigs = new List<DataCloud.AccessConfig>
                         {
-                            Name = "External NAT",
-                            Type = "ONE_TO_ONE_NAT"
+                            new DataCloud.AccessConfig
+                            {
+                                Name = "External NAT",
+                                Type = "ONE_TO_ONE_NAT"
+                            }
                         }
                     }
-                }
-            };
-            requestBody.Disks = new List<DataCloud.AttachedDisk>
-            {
-                new DataCloud.AttachedDisk
+                },
+                Disks = new List<DataCloud.AttachedDisk>
                 {
-                    DeviceName = "boot",
-                    Type = "PERSISTENT",
-                    Boot = true,
-                    AutoDelete = true,
-                    InitializeParams = new DataCloud.AttachedDiskInitializeParams
+                    new DataCloud.AttachedDisk
                     {
-                        SourceImage =
-                            "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9"
+                        DeviceName = "boot",
+                        Type = "PERSISTENT",
+                        Boot = true,
+                        AutoDelete = true,
+                        InitializeParams = new DataCloud.AttachedDiskInitializeParams
+                        {
+                            SourceImage =
+                                "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9"
+                        }
                     }
                 }
             };
 
             var request = computeService.Instances.Insert(requestBody, project, zone);
 
-            // To execute asynchronously in an async method, replace `request.Execute()` as shown:
-            var response = request.Execute();
-            // Data.Operation response = await request.ExecuteAsync();
+            var response = await request.ExecuteAsync();
 
-            // TODO: Change code below to process the `response` object:
             Console.WriteLine(JsonConvert.SerializeObject(response));
         }
 
-        public void DropInstance()
+        protected async void DropInstance()
         {
             var computeService = new ComputeService(new BaseClientService.Initializer
             {
-                HttpClientInitializer = GetCredential(),
+                HttpClientInitializer = await GetCredential(),
                 ApplicationName = "Google-ComputeSample/0.1",
             });
 
@@ -116,15 +113,15 @@ namespace HaroldAdviser.Controllers
 
             var instance = "foo";
 
-            InstancesResource.StopRequest requestStop = computeService.Instances.Stop(project, zone, instance);
+            var requestStop = computeService.Instances.Stop(project, zone, instance);
 
-            DataCloud.Operation responseStop = requestStop.Execute();
+            var responseStop = await requestStop.ExecuteAsync();
 
             Console.WriteLine(JsonConvert.SerializeObject(responseStop));
 
-            InstancesResource.DeleteRequest requestDelete = computeService.Instances.Delete(project, zone, instance);
+            var requestDelete = computeService.Instances.Delete(project, zone, instance);
 
-            DataCloud.Operation responseDelete = requestDelete.Execute();
+            var responseDelete = await requestDelete.ExecuteAsync();
 
             Console.WriteLine(JsonConvert.SerializeObject(responseDelete));
         }
