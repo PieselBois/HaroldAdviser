@@ -4,6 +4,7 @@ using Google.Apis.Services;
 using HaroldAdviser.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,12 @@ namespace HaroldAdviser.Controllers
     public class UserController : BaseController
     {
         private ApplicationContext _context;
+        private IConfiguration _configuration;
 
-        public UserController(ApplicationContext context)
+        public UserController(ApplicationContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public IActionResult Page()
@@ -32,7 +35,7 @@ namespace HaroldAdviser.Controllers
             return View();
         }
 
-        public async Task<GoogleCredential> GetCredential()
+        private async Task<GoogleCredential> GetCredential()
         {
             var credential = await GoogleCredential.GetApplicationDefaultAsync();
             if (credential.IsCreateScopedRequired)
@@ -42,7 +45,7 @@ namespace HaroldAdviser.Controllers
             return credential;
         }
 
-        protected async void CreateInstance()
+        protected async Task CreateInstance()
         {
             var computeService = new ComputeService(new BaseClientService.Initializer
             {
@@ -50,27 +53,25 @@ namespace HaroldAdviser.Controllers
                 ApplicationName = "Google-ComputeSample/0.1",
             });
 
-            var project = "haroldci-195817";
+            var project = Environment.GetEnvironmentVariable("GOOGLE_PROJECT");
 
-            var zone = "europe-west3-b";
+            var zone = Environment.GetEnvironmentVariable("GOOGLE_PROJECT_ZONE");
 
             var requestBody = new DataCloud.Instance
             {
-                Name = "foo",
-                MachineType = "https://www.googleapis.com/compute/v1/projects/" + project + "/zones/" + zone +
-                              "/machineTypes/f1-micro",
+                Name = _configuration["vm_conf:instance_name"],
+                MachineType = string.Format(_configuration["vm_conf:machine_type"], project, zone),
                 NetworkInterfaces = new List<DataCloud.NetworkInterface>
                 {
                     new DataCloud.NetworkInterface
                     {
-                        Network = "https://www.googleapis.com/compute/v1/projects/" + project +
-                                  "/global/networks/default",
+                        Network = string.Format(_configuration["vm_conf:network"], project),
                         AccessConfigs = new List<DataCloud.AccessConfig>
                         {
                             new DataCloud.AccessConfig
                             {
-                                Name = "External NAT",
-                                Type = "ONE_TO_ONE_NAT"
+                                Name = _configuration["vm_conf:access_name"],
+                                Type = _configuration["vm_conf:access_type"]
                             }
                         }
                     }
@@ -79,14 +80,13 @@ namespace HaroldAdviser.Controllers
                 {
                     new DataCloud.AttachedDisk
                     {
-                        DeviceName = "boot",
-                        Type = "PERSISTENT",
+                        DeviceName = _configuration["vm_conf:disk_name"],
+                        Type = _configuration["vm_conf:disk_type"],
                         Boot = true,
                         AutoDelete = true,
                         InitializeParams = new DataCloud.AttachedDiskInitializeParams
                         {
-                            SourceImage =
-                                "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9"
+                            SourceImage = _configuration["vm_conf:disk_image"]
                         }
                     }
                 }
@@ -99,7 +99,7 @@ namespace HaroldAdviser.Controllers
             Console.WriteLine(JsonConvert.SerializeObject(response));
         }
 
-        protected async void DropInstance()
+        protected async Task DropInstance()
         {
             var computeService = new ComputeService(new BaseClientService.Initializer
             {
@@ -107,11 +107,11 @@ namespace HaroldAdviser.Controllers
                 ApplicationName = "Google-ComputeSample/0.1",
             });
 
-            var project = "haroldci-195817";
+            var project = Environment.GetEnvironmentVariable("GOOGLE_PROJECT");
 
-            var zone = "europe-west3-b";
+            var zone = Environment.GetEnvironmentVariable("GOOGLE_PROJECT_ZONE");
 
-            var instance = "foo";
+            var instance = _configuration["vm_conf:instance_name"];
 
             var requestStop = computeService.Instances.Stop(project, zone, instance);
 
