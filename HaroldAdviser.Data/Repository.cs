@@ -17,6 +17,8 @@ namespace HaroldAdviser.Data
 
         public string Token { get; set; }
 
+        public bool Checked { get; set; }
+
         public IList<Warning> Warnings { get; set; }
     }
 }
