@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HaroldAdviser.Controllers
@@ -8,7 +9,15 @@ namespace HaroldAdviser.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = "/")
         {
-            return Challenge(new AuthenticationProperties() { RedirectUri = returnUrl });
+            return Challenge(new AuthenticationProperties() {RedirectUri = returnUrl});
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete(".AspNetCore.Cookies");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -6,10 +6,6 @@ namespace HaroldAdviser.Controllers
     {
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return View(GetUser());
-            }
             return View();
         }
     }

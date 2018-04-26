@@ -31,7 +31,7 @@ namespace HaroldAdviser.Controllers
             return model;
         }
 
-        protected async Task<IReadOnlyList<Octokit.Repository>> GetRepositories()
+        protected async Task<IReadOnlyList<Repository>> GetRepositories()
         {
             var user = GetUser();
             var accessToken = await HttpContext.GetTokenAsync("access_token");
