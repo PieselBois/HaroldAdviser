@@ -40,17 +40,17 @@ namespace HaroldAdviser.Controllers
             var credential = await GoogleCredential.GetApplicationDefaultAsync();
             if (credential.IsCreateScopedRequired)
             {
-                credential = credential.CreateScoped("https://www.googleapis.com/auth/cloud-platform");
+                credential = credential.CreateScoped(_configuration["vm_conf:credential_url"]);
             }
             return credential;
         }
 
-        protected async Task CreateInstance()
+        public async Task CreateInstance()
         {
             var computeService = new ComputeService(new BaseClientService.Initializer
             {
                 HttpClientInitializer = await GetCredential(),
-                ApplicationName = "Google-ComputeSample/0.1",
+                ApplicationName = _configuration["vm_conf:computeservice_name"],
             });
 
             var project = Environment.GetEnvironmentVariable("GOOGLE_PROJECT");
@@ -99,12 +99,12 @@ namespace HaroldAdviser.Controllers
             Console.WriteLine(JsonConvert.SerializeObject(response));
         }
 
-        protected async Task DropInstance()
+        public async Task DropInstance()
         {
             var computeService = new ComputeService(new BaseClientService.Initializer
             {
                 HttpClientInitializer = await GetCredential(),
-                ApplicationName = "Google-ComputeSample/0.1",
+                ApplicationName = _configuration["vm_conf:computeservice_name"],
             });
 
             var project = Environment.GetEnvironmentVariable("GOOGLE_PROJECT");
