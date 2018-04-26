@@ -24,7 +24,8 @@ namespace HaroldAdviser.Controllers
                 Id = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value,
                 Name = User.FindFirst(c => c.Type == ClaimTypes.Name)?.Value,
                 Login = User.FindFirst(c => c.Type == "urn:github:login")?.Value,
-                Url = User.FindFirst(c => c.Type == "urn:github:url")?.Value
+                Url = User.FindFirst(c => c.Type == "urn:github:url")?.Value,
+                Avatar = User.FindFirst(c => c.Type == "urn:github:avatar")?.Value
             };
 
             return model;
