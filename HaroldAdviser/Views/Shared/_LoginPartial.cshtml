@@ -1,7 +1,18 @@
-﻿@model HaroldAdviser.Models.GithubUser
+﻿@using System.Security.Claims
+@using HaroldAdviser.Models
+@model HaroldAdviser.Models.GithubUser
+
 @if (User.Identity.IsAuthenticated)
 {
-    <a href="@Url.Action("Page", "User")" class="btn btn-primary" role="button">Hello, @Model.Login </a>
+    <div class="dropdown">
+        <a href="#" id="profile-dropdown" class="text-white dropdown-toggle" aria-expanded="false" data-toggle="dropdown">
+            @User.FindFirst(c => c.Type == ClaimTypes.Name)?.Value
+        </a>
+        <div class="dropdown-menu" aria-labelledby="profile-dropdown">
+            <a href="@Url.Action("Page", "User")" class="dropdown-item">Profile</a>
+            <a href="@Url.Action("Logout", "Account")" id="logout" class="dropdown-item">Logout</a>
+        </div>
+    </div>
 }
 else
 {
