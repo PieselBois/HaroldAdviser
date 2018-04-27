@@ -79,7 +79,6 @@ namespace HaroldAdviser.Controllers
             }));
         }
 
-
         [HttpGet, Authorize, Route("/User/Repository/{repositoryId}")]
         public async Task<IActionResult> RepositoryInfo([FromRoute] string repositoryId)
         {
@@ -97,7 +96,6 @@ namespace HaroldAdviser.Controllers
             };
             return View(model);
         }
-
 
         /// <summary>
         /// Set {Checked} on repository with {repositoryId} to opposite
