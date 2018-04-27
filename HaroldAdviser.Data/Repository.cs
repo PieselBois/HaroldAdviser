@@ -15,7 +15,7 @@ namespace HaroldAdviser.Data
 
         public string UserId { get; set; }
 
-        public string Token { get; set; }
+        public string ApiKey { get; set; }
 
         public bool Checked { get; set; }
 
