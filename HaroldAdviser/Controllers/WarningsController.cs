@@ -17,8 +17,7 @@ namespace HaroldAdviser.Controllers
             _context = context;
         }
 
-        [HttpPost]
-        [Route("add/{Key}")]
+        [HttpPost, Route("add/{Key}")]
         public IActionResult Add(string key, [FromBody] IList<WarningModel> model)
         {
             foreach (var element in model)
@@ -33,6 +32,7 @@ namespace HaroldAdviser.Controllers
                 var repository = _context.Repositories.Include(r => r.Warnings).First(r => r.ApiKey == key);
                 repository.Warnings.Add(log);
             }
+
             _context.SaveChanges();
             return Ok();
         }

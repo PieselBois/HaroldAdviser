@@ -6,7 +6,7 @@
             @User.FindFirst(c => c.Type == "urn:github:login")?.Value
         </a>
         <div class="dropdown-menu" aria-labelledby="profile-dropdown">
-            <a href="@Url.Action("Page", "User")" class="dropdown-item">Profile</a>
+            <a href="@Url.Action("Account", "User")" class="dropdown-item">Profile</a>
             <a href="@Url.Action("Logout", "Account")" id="logout" class="dropdown-item">Logout</a>
         </div>
     </div>
