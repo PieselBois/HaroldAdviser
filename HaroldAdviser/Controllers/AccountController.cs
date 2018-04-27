@@ -12,8 +12,7 @@ namespace HaroldAdviser.Controllers
             return Challenge(new AuthenticationProperties() {RedirectUri = returnUrl});
         }
 
-        [HttpGet]
-        [Authorize]
+        [HttpGet, Authorize]
         public IActionResult Logout()
         {
             Response.Cookies.Delete(".AspNetCore.Cookies");

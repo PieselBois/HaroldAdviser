@@ -1,7 +1,5 @@
 ﻿using HaroldAdviser.Data;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HaroldAdviser.Controllers
 {
