@@ -41,13 +41,7 @@ namespace HaroldAdviser.Controllers
             return await github.Repository.GetAllForUser(user.Login);
         }
 
-        protected string Encode(string value)
-        {
-            var guid = new Guid(value);
-            return Encode(guid);
-        }
-
-        protected string Encode(Guid guid)
+        protected static string Encode(Guid guid)
         {
             var encoded = Convert.ToBase64String(guid.ToByteArray());
             encoded = encoded
@@ -56,7 +50,7 @@ namespace HaroldAdviser.Controllers
             return encoded.Substring(0, 22);
         }
 
-        protected Guid Decode(string value)
+        protected static Guid Decode(string value)
         {
             value = value
                 .Replace("_", "/")
