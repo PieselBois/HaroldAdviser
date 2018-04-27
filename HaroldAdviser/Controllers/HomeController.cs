@@ -14,11 +14,9 @@ namespace HaroldAdviser.Controllers
             _context = context;
         }
 
-
         public IActionResult Index()
         {
             return View();
         }
-
     }
 }
