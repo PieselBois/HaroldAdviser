@@ -15,6 +15,7 @@ using Repository = HaroldAdviser.Data.Repository;
 
 namespace HaroldAdviser.Controllers
 {
+    [Route("/api/User")]
     public class UserController : BaseController
     {
         private ApplicationContext _context;
@@ -32,6 +33,7 @@ namespace HaroldAdviser.Controllers
             {
                 return View(GetUser());
             }
+
             return View();
         }
 
@@ -42,6 +44,7 @@ namespace HaroldAdviser.Controllers
             {
                 credential = credential.CreateScoped(_configuration["vm_conf:credential_url"]);
             }
+
             return credential;
         }
 
@@ -128,6 +131,7 @@ namespace HaroldAdviser.Controllers
 
         [HttpGet]
         [Authorize]
+        [Route("/api/User/Repository/sync")]
         public async Task<IActionResult> SyncRepositories()
         {
             var user = GetUser();
@@ -150,12 +154,44 @@ namespace HaroldAdviser.Controllers
                 {
                     UserId = user.Id,
                     Url = repository.HtmlUrl,
-                    Token = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=", "").Replace("+", "")
+                    ApiKey = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=", "").Replace("+", "")
                 });
             }
 
             await _context.SaveChangesAsync();
             return Ok();
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("/api/User/Repository")]
+        public IActionResult ShowRepositories()
+        {
+            var user = GetUser();
+
+            var repositories = _context.Repositories.Where(r => r.UserId == user.Id);
+
+            return Json(repositories.Select(r => new Models.Repository
+            {
+                Url = r.Url,
+                Active = r.Checked,
+                Id = Encode(r.Id)
+            }));
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("/User/Repository/{repositoryId}")]
+        public async Task<IActionResult> RepositoryInfo([FromRoute] string repositoryId)
+        {
+            var id = Decode(repositoryId);
+            var repo = await _context.Repositories.FindAsync(id);
+            var model = new Models.Repository
+            {
+                Url = repo.Url,
+                Active = repo.Checked
+            };
+            return View(model);
         }
     }
 }
