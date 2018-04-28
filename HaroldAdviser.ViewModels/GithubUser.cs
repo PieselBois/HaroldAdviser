@@ -1,4 +1,4 @@
-﻿namespace HaroldAdviser.Models
+﻿namespace HaroldAdviser.ViewModels
 {
     public class GithubUser
     {
