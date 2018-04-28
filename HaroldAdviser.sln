@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaroldAdviser.Tests", "Haro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaroldAdviser.Data", "HaroldAdviser.Data\HaroldAdviser.Data.csproj", "{DDFDAE91-A677-4D6C-98FE-453207D21DC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaroldAdviser.ViewModels", "HaroldAdviser.ViewModels\HaroldAdviser.ViewModels.csproj", "{E0B2F6CB-BAF7-4F98-B8BC-BA0BAD69CBBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaroldAdviser.BL", "HaroldAdviser.BL\HaroldAdviser.BL.csproj", "{80BA2F40-D42F-4136-9EE3-4EF2FCD5532B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{DDFDAE91-A677-4D6C-98FE-453207D21DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDFDAE91-A677-4D6C-98FE-453207D21DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDFDAE91-A677-4D6C-98FE-453207D21DC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0B2F6CB-BAF7-4F98-B8BC-BA0BAD69CBBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0B2F6CB-BAF7-4F98-B8BC-BA0BAD69CBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0B2F6CB-BAF7-4F98-B8BC-BA0BAD69CBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0B2F6CB-BAF7-4F98-B8BC-BA0BAD69CBBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80BA2F40-D42F-4136-9EE3-4EF2FCD5532B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80BA2F40-D42F-4136-9EE3-4EF2FCD5532B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80BA2F40-D42F-4136-9EE3-4EF2FCD5532B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80BA2F40-D42F-4136-9EE3-4EF2FCD5532B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,9 @@
 ﻿using HaroldAdviser.Data;
-using HaroldAdviser.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using HaroldAdviser.ViewModels;
 
 namespace HaroldAdviser.Controllers
 {

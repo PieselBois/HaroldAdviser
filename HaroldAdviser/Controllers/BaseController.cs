@@ -1,5 +1,4 @@
-﻿using HaroldAdviser.Models;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Octokit;
 using Octokit.Internal;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.Security.Authentication;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using HaroldAdviser.ViewModels;
 
 namespace HaroldAdviser.Controllers
 {

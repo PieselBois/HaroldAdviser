@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Google.Apis.Compute.v1" Version="1.33.0.1204" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
@@ -16,6 +16,8 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HaroldAdviser.BL\HaroldAdviser.BL.csproj" />
     <ProjectReference Include="..\HaroldAdviser.Data\HaroldAdviser.Data.csproj" />
+    <ProjectReference Include="..\HaroldAdviser.ViewModels\HaroldAdviser.ViewModels.csproj" />
   </ItemGroup>
 </Project>
