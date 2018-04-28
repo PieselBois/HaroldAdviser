@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using DataCloud = Google.Apis.Compute.v1.Data;
 using Repository = HaroldAdviser.Data.Repository;
 
@@ -27,8 +26,14 @@ namespace HaroldAdviser.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet, Authorize, Route("/Account")]
+        [HttpGet, Authorize, Route("/User")]
         public IActionResult Account()
+        {
+            return View();
+        }
+
+        [HttpGet, Authorize, Route("/User/Repository/Check")]
+        public IActionResult AllRepositories()
         {
             return View();
         }
@@ -76,7 +81,7 @@ namespace HaroldAdviser.Controllers
                 Url = r.Url,
                 Active = r.Checked,
                 Id = Encode(r.Id)
-            }));
+            }).OrderBy(r => r.Url));
         }
 
         [HttpGet, Authorize, Route("/User/Repository/{repositoryId}")]
