@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using DataCloud = Google.Apis.Compute.v1.Data;
 
-
 namespace HaroldAdviser.BL
 {
     public class GoogleCloudInstanceManager : ICloudInstanceManager

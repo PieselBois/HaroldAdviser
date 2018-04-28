@@ -12,7 +12,6 @@ namespace HaroldAdviser.Controllers
     {
         private readonly ApplicationContext _context;
 
-
         public UserController(ApplicationContext context)
         {
             _context = context;
