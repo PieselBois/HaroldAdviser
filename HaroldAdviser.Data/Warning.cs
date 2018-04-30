@@ -6,8 +6,7 @@ namespace HaroldAdviser.Data
 {
     public class Warning
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
         public Guid Id { get; set; }
 
         public string Kind { get; set; }

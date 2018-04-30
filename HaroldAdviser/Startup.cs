@@ -114,8 +114,9 @@ namespace HaroldAdviser
 
             builder.Populate(services);
             builder.RegisterType<GoogleCloudInstanceManager>().As<ICloudInstanceManager>();
+            builder.RegisterType<PipelineManager>().As<IPipelineManager>();
             ApplicationContainer = builder.Build();
-            
+
             return new AutofacServiceProvider(ApplicationContainer);
         }
 
