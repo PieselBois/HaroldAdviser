@@ -11,6 +11,7 @@ var load_repositories = function () {
                     $(".all-repos").append("<span>" + val.url + "</span>");
                     $(".all-repos").append("<br>");
                 });
+            //TODO: fobid fast clicking on checkbox (maybe add some blocking animation)
             $(".repo-check").click(function (eventObject) {
                 var target = $(eventObject.target);
                 $.post("/User/Repository/Check/" + target.data("check-id"));
