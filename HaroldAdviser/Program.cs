@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using NLog.Web;
 
@@ -11,8 +12,9 @@ namespace HaroldAdviser
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        private static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureServices(services => services.AddAutofac())
                 .UseStartup<Startup>().UseNLog()
                 .Build();
     }
