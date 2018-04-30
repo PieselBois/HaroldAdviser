@@ -2,7 +2,7 @@
 {
     <div class="dropdown">
         <a href="#" id="profile-dropdown" class="text-white dropdown-toggle" aria-expanded="false" data-toggle="dropdown">
-            <img src="@User.FindFirst(c => c.Type == "urn:github:avatar")?.Value" class="avatar" alt=""/>
+            <img src="@User.FindFirst(c => c.Type == "urn:github:avatar")?.Value" class="avatar" alt="" />
             @User.FindFirst(c => c.Type == "urn:github:login")?.Value
         </a>
         <div class="dropdown-menu" aria-labelledby="profile-dropdown">
