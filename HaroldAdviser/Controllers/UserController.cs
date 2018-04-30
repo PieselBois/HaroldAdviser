@@ -17,8 +17,14 @@ namespace HaroldAdviser.Controllers
             _context = context;
         }
 
-        [HttpGet, Authorize, Route("/Account")]
+        [HttpGet, Authorize, Route("/User")]
         public IActionResult Account()
+        {
+            return View();
+        }
+
+        [HttpGet, Authorize, Route("/User/Repository/Check")]
+        public IActionResult AllRepositories()
         {
             return View();
         }
@@ -66,7 +72,7 @@ namespace HaroldAdviser.Controllers
                 Url = r.Url,
                 Active = r.Checked,
                 Id = Encode(r.Id)
-            }));
+            }).OrderBy(r => r.Url));
         }
 
         [HttpGet, Authorize, Route("/User/Repository/{repositoryId}")]

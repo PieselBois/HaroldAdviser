@@ -2,14 +2,24 @@
     Layout = "_Layout";
 }
 
+
 <main role="main">
-    <div class="container position-relative pt-5">
-        <div class="row pt-5 justify-content-md-center">
-            <div class="col-12 col-md-8 d-block text-center">
-                <a href="@Url.Action("SyncRepositories", "User")" class="btn btn-success" role="button">
-                    Sync Repositories
-                </a>
+    @*<div class="container position-relative pt-5">
+            <div class="row pt-5 justify-content-md-center">
+                <div class="col-12 col-md-8 d-block text-center">
+                    <a href="@Url.Action("SyncRepositories", "User")" class="btn btn-success" role="button">
+                        Sync Repositories
+                    </a>
+                </div>
             </div>
-        </div>
+        </div>*@
+
+    <div class="repo-container">
+        <a href="@Url.Action("AllRepositories", "User")" role="button">+</a>
     </div>
 </main>
+
+@section scripts
+    {
+    <script src="~/Scripts/repository-panel.js"></script>
+}
