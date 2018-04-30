@@ -6,6 +6,7 @@ namespace HaroldAdviser.Data
     {
         public DbSet<Repository> Repositories { get; set; }
         public DbSet<Warning> Warnings { get; set; }
+        public DbSet<Pipeline> Pipelines { get; set; }
 
         public ApplicationContext(DbContextOptions options)
             : base(options)

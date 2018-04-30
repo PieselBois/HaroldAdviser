@@ -7,15 +7,12 @@ namespace HaroldAdviser.Data
 {
     public class Repository
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
         public Guid Id { get; set; }
 
         public string Url { get; set; }
 
         public string UserId { get; set; }
-
-        public string ApiKey { get; set; }
 
         public bool Checked { get; set; }
 

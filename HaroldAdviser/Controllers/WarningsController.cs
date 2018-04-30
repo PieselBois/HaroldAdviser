@@ -29,8 +29,6 @@ namespace HaroldAdviser.Controllers
                     Lines = element.Lines,
                     Message = element.Message
                 };
-                var repository = _context.Repositories.Include(r => r.Warnings).First(r => r.ApiKey == key);
-                repository.Warnings.Add(log);
             }
 
             _context.SaveChanges();
