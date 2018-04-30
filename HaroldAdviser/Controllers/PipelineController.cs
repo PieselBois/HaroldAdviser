@@ -45,7 +45,7 @@ namespace HaroldAdviser.Controllers
             {
                 return Ok();
             }
-
+ 
             return BadRequest(result.Error);
         }
     }
