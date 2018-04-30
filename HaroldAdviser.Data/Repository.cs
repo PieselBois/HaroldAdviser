@@ -16,6 +16,10 @@ namespace HaroldAdviser.Data
 
         public bool Checked { get; set; }
 
-        public IList<Warning> Warnings { get; set; }
+        public virtual List<Warning> Warnings { get; set; }
+
+        public virtual RepositorySettings Settings { get; set; }
+
+        public virtual List<Pipeline> Pipelines { get; set; }
     }
 }

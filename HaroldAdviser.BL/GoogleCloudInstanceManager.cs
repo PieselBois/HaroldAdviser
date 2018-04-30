@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Compute.v1;
 using Google.Apis.Services;
+using HaroldAdviser.Data;
+using HaroldAdviser.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using DataCloud = Google.Apis.Compute.v1.Data;
@@ -30,8 +32,10 @@ namespace HaroldAdviser.BL
             return credential;
         }
 
-        public async Task CreateInstanceAsync()
+        public async Task CreateInstanceAsync(IWebhook webhook, RepositorySettings settings)
         {
+            //TODO: start instance for webhook and settings
+
             var computeService = new ComputeService(new BaseClientService.Initializer
             {
                 HttpClientInitializer = await GetCredentialAsync(),

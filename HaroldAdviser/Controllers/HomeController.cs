@@ -1,5 +1,4 @@
-﻿using HaroldAdviser.Data;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace HaroldAdviser.Controllers
 {
