@@ -22,6 +22,12 @@ namespace HaroldAdviser.Controllers
             return View();
         }
 
+        [HttpGet, Authorize, Route("/User/Repository/Check")]
+        public IActionResult AllRepositories()
+        {
+            return View();
+        }
+
         [HttpGet, Authorize, Route("/api/User/Repository/sync")]
         public async Task<IActionResult> SyncRepositories()
         {
@@ -67,7 +73,7 @@ namespace HaroldAdviser.Controllers
                 Url = r.Url,
                 Active = r.Checked,
                 Id = Encode(r.Id)
-            }));
+            }).OrderBy(r => r.Url));
         }
 
         [HttpGet, Authorize, Route("/User/Repository/{repositoryId}")]
