@@ -6,7 +6,7 @@ namespace HaroldAdviser.BL
 {
     public interface ICloudInstanceManager
     {
-        Task CreateInstanceAsync(IWebhook webhook, RepositorySettings settins);
+        Task CreateInstanceAsync(IWebhook webhook, RepositorySettings settings);
         Task DropInstanceAsync();
     }
 }

@@ -33,7 +33,7 @@ namespace HaroldAdviser.BL
                 Warnings = new List<Warning>()
             };
 
-            //TODO: check how lazy inicialization works with insert
+            //TODO: check how lazy initialization works with insert
             pipeline.Logs.Add(new Log
             {
                 Type = LogType.Debug,
