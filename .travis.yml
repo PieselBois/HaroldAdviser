@@ -2,10 +2,22 @@ language: csharp
 solution: HaroldAdviser.sln
 mono: none
 dotnet: 2.0.0
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
+    - REPO=pieselbois/haroldadviser
 install:
 - dotnet restore
 script:
 - dotnet build
 - dotnet test HaroldAdviser.Tests/
+- docker build -t $REPO .
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - if [[ $TRAVIS_PULL_REQUEST=="false" ]] && [[ $TRAVIS_BRANCH=="master" ]]; then
+      docker tag $REPO $REPO:$TRAVIS_BUILD_NUMBER;
+      docker push $REPO:$TRAVIS_BUILD_NUMBER;
+    fi
+  - docker push $REPO
 notifications:
-email: false
+  email: false
