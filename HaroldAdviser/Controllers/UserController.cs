@@ -1,7 +1,11 @@
 ﻿using HaroldAdviser.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+<<<<<<< Updated upstream
 using System;
+=======
+using System.Collections.Generic;
+>>>>>>> Stashed changes
 using System.Linq;
 using System.Threading.Tasks;
 using Repository = HaroldAdviser.Data.Repository;
@@ -29,7 +33,7 @@ namespace HaroldAdviser.Controllers
             return View();
         }
 
-        [HttpGet, Authorize, Route("/api/User/Repository/sync")]
+        [HttpGet, Authorize, Route("/Api/User/Repository/Sync")]
         public async Task<IActionResult> SyncRepositories()
         {
             var user = GetUser();
@@ -60,7 +64,7 @@ namespace HaroldAdviser.Controllers
             return Ok();
         }
 
-        [HttpGet, Authorize, Route("/api/User/Repository")]
+        [HttpGet, Authorize, Route("/Api/User/Repository")]
         public IActionResult ShowRepositories()
         {
             var user = GetUser();
@@ -111,6 +115,18 @@ namespace HaroldAdviser.Controllers
             repo.Checked = !repo.Checked;
             await _context.SaveChangesAsync();
             return Ok();
+        }
+
+        [HttpGet, Authorize, Route("/Api/User/Repository/Warnings")]
+        public IActionResult GetWarnings()
+        {
+            var warnings = new List<string>
+            {
+                "Hello",
+                "There!"
+            };
+
+            return Json(warnings);
         }
     }
 }
