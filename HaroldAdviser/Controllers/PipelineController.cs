@@ -18,8 +18,6 @@ namespace HaroldAdviser.Controllers
         [HttpPost, Route("Api/Pipeline/Create")]
         public async Task<IActionResult> CreatePipeline([FromBody] GithubWebhook webhook)
         {
-            //TODO: handle github webhook to create pipeline
-
             var result = await _pipelineManager.CreatePipelineAsync(webhook);
 
             if (result.Success)

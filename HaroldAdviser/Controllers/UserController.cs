@@ -118,10 +118,50 @@ namespace HaroldAdviser.Controllers
         [HttpGet, Authorize, Route("/Api/User/Repository/Warnings")]
         public IActionResult GetWarnings()
         {
-            var warnings = new List<string>
+            var warnings = new List<Warning>
             {
-                "Hello",
-                "There!"
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "15, 16",
+                    Message = "Variable 'block' is reassigned a value before the old one has been used."
+                },
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "30, 33",
+                    Message = "Variable 'block' is reassigned a value before the old one has been used."
+                },
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "31, 35",
+                    Message = "Variable 'block2' is reassigned a value before the old one has been used."
+                },
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "55, 58",
+                    Message = "Variable 'block' is reassigned a value before the old one has been used."
+                },
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "79, 82",
+                    Message = "Variable 'block' is reassigned a value before the old one has been used."
+                },
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "80, 83",
+                    Message = "Variable 'block2' is reassigned a value before the old one has been used."
+                }
             };
 
             return Json(warnings);
