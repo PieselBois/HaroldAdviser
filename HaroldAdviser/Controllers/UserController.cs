@@ -1,11 +1,8 @@
-﻿using HaroldAdviser.Data;
+using HaroldAdviser.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-<<<<<<< Updated upstream
 using System;
-=======
 using System.Collections.Generic;
->>>>>>> Stashed changes
 using System.Linq;
 using System.Threading.Tasks;
 using Repository = HaroldAdviser.Data.Repository;
@@ -43,22 +40,24 @@ namespace HaroldAdviser.Controllers
                 return BadRequest(ModelState);
             }
 
-            var repositories = await GetRepositories();
+            var remoteRepositories = await GetRepositories();
 
-            foreach (var repository in repositories)
-            {
-                if (_context.Repositories.Any(r => r.Url == repository.HtmlUrl))
-                {
-                    continue;
-                }
+            var dbrepos = _context.Repositories.Where(r => r.UserId == user.Id);
 
-                _context.Repositories.Add(new Repository
+            var dburls = dbrepos.Select(r => r.Url).ToHashSet();
+
+            var remoteUrls = remoteRepositories.Select(r => r.HtmlUrl).ToHashSet();
+
+            var reposToDelete = dbrepos.Where(r => !remoteUrls.Contains(r.Url));
+
+            await _context.Repositories.AddRangeAsync(remoteRepositories.Where(r => !dburls.Contains(r.HtmlUrl)).Select(
+                r => new Repository
                 {
                     UserId = user.Id,
-                    Url = repository.HtmlUrl,
-                    ApiKey = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=", "").Replace("+", "")
-                });
-            }
+                    Url = r.HtmlUrl
+                }));
+
+            _context.Repositories.RemoveRange(reposToDelete);
 
             await _context.SaveChangesAsync();
             return Ok();

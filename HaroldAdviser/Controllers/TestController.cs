@@ -22,7 +22,7 @@ namespace HaroldAdviser.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateInstance()
         {
-            await _instanceManager.CreateInstanceAsync();
+            await _instanceManager.CreateInstanceAsync(null, null);
             return Ok();
         }
 

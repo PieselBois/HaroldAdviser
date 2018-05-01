@@ -1,4 +1,4 @@
-﻿using HaroldAdviser.ViewModels.Github;
+using HaroldAdviser.ViewModels.Github;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;

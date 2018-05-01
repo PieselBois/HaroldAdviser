@@ -1,4 +1,4 @@
-﻿using HaroldAdviser.BL;
+using HaroldAdviser.BL;
 using HaroldAdviser.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
