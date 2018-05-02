@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
 using HaroldAdviser.BL;
 using HaroldAdviser.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace HaroldAdviser.Controllers
 {
@@ -15,11 +15,9 @@ namespace HaroldAdviser.Controllers
             _pipelineManager = pipelineManager;
         }
 
-        [HttpPost, Route("api/Pipeline/Create")]
-        public async Task<IActionResult> CreatePipeline(IWebhook webhook)
+        [HttpPost, Route("Api/Pipeline/Create")]
+        public async Task<IActionResult> CreatePipeline([FromBody] GithubWebhook webhook)
         {
-            //TODO: handle github webhook to create pipeline
-
             var result = await _pipelineManager.CreatePipelineAsync(webhook);
 
             if (result.Success)
@@ -30,14 +28,14 @@ namespace HaroldAdviser.Controllers
             return BadRequest(result.Error);
         }
 
-        [HttpPost, Route("api/Pipeline/Close/{pipelineId}")]
+        [HttpPost, Route("Api/Pipeline/Close/{pipelineId}")]
         public async Task<IActionResult> ClosePipeline([FromRoute] Guid pipelineId, PipelineResult model)
         {
             await _pipelineManager.ClosePipelineAsync(pipelineId, model);
             return Ok();
         }
 
-        [HttpPost, Route("api/Pipeline/Start/{pipelineId}")]
+        [HttpPost, Route("Api/Pipeline/Start/{pipelineId}")]
         public async Task<IActionResult> StartPipeline([FromRoute] Guid pipelineId)
         {
             var result = await _pipelineManager.StartPipelineAsync(pipelineId);
@@ -45,7 +43,7 @@ namespace HaroldAdviser.Controllers
             {
                 return Ok();
             }
- 
+
             return BadRequest(result.Error);
         }
     }

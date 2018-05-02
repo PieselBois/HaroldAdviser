@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using HaroldAdviser.BL;
+﻿using HaroldAdviser.BL;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HaroldAdviser.Controllers
 {

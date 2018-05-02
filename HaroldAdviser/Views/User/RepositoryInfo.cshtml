@@ -5,8 +5,22 @@
     Layout = "_Layout";
 }
 
+<span>Name:</span>
+<span>@Model.Name</span>
+<br>
+<span>Url:</span>
 <span>@Model.Url</span>
 <br>
-<span>@Model.Id</span>
-<br>
+@*<span>@Model.Id</span>
+    <br>*@
+<span>Active:</span>
 <span>@Model.Active</span>
+<br>
+<div class="warnings">
+    <span>Warnings:</span>
+    <br />
+</div>
+
+@section scripts{
+    <script src="~/Scripts/get-warnings.js"></script>
+}

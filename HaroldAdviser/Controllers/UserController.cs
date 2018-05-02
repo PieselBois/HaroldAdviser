@@ -1,6 +1,7 @@
-﻿using HaroldAdviser.Data;
+using HaroldAdviser.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Repository = HaroldAdviser.Data.Repository;
@@ -28,7 +29,7 @@ namespace HaroldAdviser.Controllers
             return View();
         }
 
-        [HttpGet, Authorize, Route("/api/User/Repository/sync")]
+        [HttpGet, Authorize, Route("/Api/User/Repository/Sync")]
         public async Task<IActionResult> SyncRepositories()
         {
             var user = GetUser();
@@ -52,7 +53,8 @@ namespace HaroldAdviser.Controllers
                 r => new Repository
                 {
                     UserId = user.Id,
-                    Url = r.HtmlUrl
+                    Url = r.HtmlUrl,
+                    Name = r.FullName
                 }));
 
             _context.Repositories.RemoveRange(reposToDelete);
@@ -61,7 +63,7 @@ namespace HaroldAdviser.Controllers
             return Ok();
         }
 
-        [HttpGet, Authorize, Route("/api/User/Repository")]
+        [HttpGet, Authorize, Route("/Api/User/Repository")]
         public IActionResult ShowRepositories()
         {
             var user = GetUser();
@@ -72,7 +74,8 @@ namespace HaroldAdviser.Controllers
             {
                 Url = r.Url,
                 Active = r.Checked,
-                Id = Encode(r.Id)
+                Id = Encode(r.Id),
+                Name = r.Name
             }).OrderBy(r => r.Url));
         }
 
@@ -89,7 +92,8 @@ namespace HaroldAdviser.Controllers
             var model = new ViewModels.Repository
             {
                 Url = repo.Url,
-                Active = repo.Checked
+                Active = repo.Checked,
+                Name = repo.Name
             };
             return View(model);
         }
@@ -112,6 +116,58 @@ namespace HaroldAdviser.Controllers
             repo.Checked = !repo.Checked;
             await _context.SaveChangesAsync();
             return Ok();
+        }
+
+        [HttpGet, Authorize, Route("/Api/User/Repository/Warnings")]
+        public IActionResult GetWarnings()
+        {
+            var warnings = new List<Warning>
+            {
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "15, 16",
+                    Message = "Variable 'block' is reassigned a value before the old one has been used."
+                },
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "30, 33",
+                    Message = "Variable 'block' is reassigned a value before the old one has been used."
+                },
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "31, 35",
+                    Message = "Variable 'block2' is reassigned a value before the old one has been used."
+                },
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "55, 58",
+                    Message = "Variable 'block' is reassigned a value before the old one has been used."
+                },
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "79, 82",
+                    Message = "Variable 'block' is reassigned a value before the old one has been used."
+                },
+                new Warning
+                {
+                    Kind = "style",
+                    File = "/home/fexolm/git/SLama/tests/block-test.c",
+                    Lines = "80, 83",
+                    Message = "Variable 'block2' is reassigned a value before the old one has been used."
+                }
+            };
+
+            return Json(warnings);
         }
     }
 }
