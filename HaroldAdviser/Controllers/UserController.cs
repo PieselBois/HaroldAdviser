@@ -53,7 +53,8 @@ namespace HaroldAdviser.Controllers
                 r => new Repository
                 {
                     UserId = user.Id,
-                    Url = r.HtmlUrl
+                    Url = r.HtmlUrl,
+                    Name = r.FullName
                 }));
 
             _context.Repositories.RemoveRange(reposToDelete);
@@ -73,7 +74,8 @@ namespace HaroldAdviser.Controllers
             {
                 Url = r.Url,
                 Active = r.Checked,
-                Id = Encode(r.Id)
+                Id = Encode(r.Id),
+                Name = r.Name
             }).OrderBy(r => r.Url));
         }
 
@@ -90,7 +92,8 @@ namespace HaroldAdviser.Controllers
             var model = new ViewModels.Repository
             {
                 Url = repo.Url,
-                Active = repo.Checked
+                Active = repo.Checked,
+                Name = repo.Name
             };
             return View(model);
         }

@@ -8,7 +8,7 @@ var load_repositories = function () {
             $.each(data,
                 function (ind, val) {
                     $(".all-repos").append("<input class='repo-check' type='checkbox' " + (val.active ? "checked " : "") + "data-check-id='" + val.id + "'>");
-                    $(".all-repos").append("<span>" + val.url + "</span>");
+                    $(".all-repos").append("<span>" + val.name + "</span>");
                     $(".all-repos").append("<br>");
                 });
             //TODO: forbid fast clicking on checkbox (maybe add some blocking animation)

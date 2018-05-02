@@ -8,7 +8,7 @@ var load_active_repositories = function () {
             $.each(data,
                 function (ind, val) {
                     if (val.active) {
-                        $(".repo-container").append("<a href='/User/Repository/" + val.id + "'>" + val.url + "</a>");
+                        $(".repo-container").append("<a href='/User/Repository/" + val.id + "'>" + val.name + "</a>");
                         $(".repo-container").append("<br>");
                     }
                 });

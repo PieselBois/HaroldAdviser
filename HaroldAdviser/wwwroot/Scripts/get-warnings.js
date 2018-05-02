@@ -10,8 +10,8 @@ var get_warnings = function() {
 
                     //TODO: add class for warnings
 
-                    $("").append(val.kind + val.file + val.lines + val.message);
-                    $("").append("<br>");
+                    $(".warnings").append("<span>" + val.kind + val.file + val.lines + val.message + "</span>");
+                    $(".warnings").append("<br>");
                 });
         });
 };
