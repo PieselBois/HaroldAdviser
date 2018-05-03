@@ -1,4 +1,7 @@
-﻿using HaroldAdviser.Data;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using HaroldAdviser.BL;
+using HaroldAdviser.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth;
@@ -16,9 +19,6 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using HaroldAdviser.BL;
 
 namespace HaroldAdviser
 {

@@ -2,7 +2,7 @@
 {
     public enum PipelineStatus
     {
-        Webhook,
+        New,
         Started,
         Finished,
         Failed

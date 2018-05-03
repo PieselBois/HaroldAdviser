@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using HaroldAdviser.Data;
+﻿using HaroldAdviser.Data;
 using HaroldAdviser.ViewModels;
+using System.Threading.Tasks;
 
 namespace HaroldAdviser.BL
 {

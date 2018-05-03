@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HaroldAdviser.Data;
+﻿using HaroldAdviser.Data;
 using HaroldAdviser.Data.Enums;
 using HaroldAdviser.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HaroldAdviser.BL
 {
@@ -28,7 +28,7 @@ namespace HaroldAdviser.BL
             var pipeline = new Pipeline
             {
                 CloneUrl = webhook.CloneUrl,
-                Status = PipelineStatus.Webhook,
+                Status = PipelineStatus.New,
                 Logs = new List<Log>(),
                 Warnings = new List<Warning>()
             };
