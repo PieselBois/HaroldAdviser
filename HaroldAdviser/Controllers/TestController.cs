@@ -37,7 +37,7 @@ namespace HaroldAdviser.Controllers
             return Ok();
         }
 
-        [HttpGet, Route("/User/GetLogs")]
+        [HttpGet, Route("/Api/Test/Logs")]
         public IActionResult GetLogs()
         {
             var logs = _context.Logs;
