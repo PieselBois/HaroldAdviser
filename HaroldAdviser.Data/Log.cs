@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HaroldAdviser.Data.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using HaroldAdviser.Data.Enums;
 
 namespace HaroldAdviser.Data
 {
@@ -10,7 +10,7 @@ namespace HaroldAdviser.Data
         public LogType Type { get; set; }
 
         public string Module { get; set; }
-        
+
         public string Value { get; set; }
     }
 }

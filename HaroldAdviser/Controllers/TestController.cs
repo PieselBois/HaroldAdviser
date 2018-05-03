@@ -1,5 +1,7 @@
 ﻿using HaroldAdviser.BL;
+using HaroldAdviser.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HaroldAdviser.Controllers
@@ -7,10 +9,12 @@ namespace HaroldAdviser.Controllers
     public class TestController : Controller
     {
         private readonly ICloudInstanceManager _instanceManager;
+        private readonly ApplicationContext _context;
 
-        public TestController(ICloudInstanceManager instanceManager)
+        public TestController(ICloudInstanceManager instanceManager, ApplicationContext context)
         {
             _instanceManager = instanceManager;
+            _context = context;
         }
 
         [HttpGet]
@@ -31,6 +35,19 @@ namespace HaroldAdviser.Controllers
         {
             await _instanceManager.DropInstanceAsync();
             return Ok();
+        }
+
+        [HttpGet, Route("/Api/Test/Logs")]
+        public IActionResult GetLogs()
+        {
+            var logs = _context.Logs;
+
+            return Json(logs.Select(r => new Log
+            {
+                Module = r.Module,
+                Type = r.Type,
+                Value = r.Value
+            }));
         }
     }
 }
