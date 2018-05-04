@@ -22,7 +22,8 @@ namespace HaroldAdviser.BL
 
         public async Task<Result> CreatePipelineAsync(IWebhook webhook)
         {
-            var repository = await _context.Repositories.Include(r => r.Settings).FirstOrDefaultAsync(r => r.Url == webhook.HtmlUrl);
+            var repository = await _context.Repositories.Include(r => r.Settings).Include(r => r.Pipelines).FirstOrDefaultAsync(r => r.Url == webhook.HtmlUrl);
+
             if (repository == null)
             {
                 return new Result("Repository not found.");
@@ -32,6 +33,7 @@ namespace HaroldAdviser.BL
             {
                 CloneUrl = webhook.CloneUrl,
                 Status = PipelineStatus.New,
+                Repository = repository,
                 Logs = new List<Log>(),
                 Warnings = new List<Warning>()
             };
