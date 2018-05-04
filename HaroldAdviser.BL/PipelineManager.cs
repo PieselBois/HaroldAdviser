@@ -50,7 +50,7 @@ namespace HaroldAdviser.BL
 
             await _context.SaveChangesAsync();
 
-            await _instanceManager.CreateInstanceAsync(webhook, repository.Settings);
+            //await _instanceManager.CreateInstanceAsync(webhook, repository.Settings);
 
             return Result.Ok;
         }
