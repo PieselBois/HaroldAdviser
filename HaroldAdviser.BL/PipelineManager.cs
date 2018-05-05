@@ -22,7 +22,8 @@ namespace HaroldAdviser.BL
 
         public async Task<Result> CreatePipelineAsync(IWebhook webhook)
         {
-            var repository = await _context.Repositories.Include(r => r.Settings).Include(r => r.Pipelines).FirstOrDefaultAsync(r => r.Url == webhook.HtmlUrl);
+            var repository = await _context.Repositories.Include(r => r.Settings)
+                .Include(r => r.Pipelines).FirstOrDefaultAsync(r => r.Url == webhook.HtmlUrl);
 
             if (repository == null)
             {
@@ -38,7 +39,6 @@ namespace HaroldAdviser.BL
                 Warnings = new List<Warning>()
             };
 
-            //TODO: check how lazy initialization works with insert
             pipeline.Logs.Add(new Log
             {
                 Type = LogType.Debug,
@@ -49,8 +49,6 @@ namespace HaroldAdviser.BL
             repository.Pipelines.Add(pipeline);
 
             await _context.SaveChangesAsync();
-
-            //await _instanceManager.CreateInstanceAsync(webhook, repository.Settings);
 
             return Result.Ok;
         }
