@@ -46,7 +46,8 @@ namespace HaroldAdviser.Controllers
             {
                 Module = r.Module,
                 Type = r.Type,
-                Value = r.Value
+                Value = r.Value,
+                Id = r.Id
             }));
         }
     }

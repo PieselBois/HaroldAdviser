@@ -2,7 +2,7 @@
 {
     public enum LogType
     {
-        Debug,
+        Debug = 1,
         Info,
         Warning,
         Error,

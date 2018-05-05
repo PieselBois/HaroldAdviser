@@ -1,7 +1,6 @@
 using HaroldAdviser.ViewModels.Github;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace HaroldAdviser.ViewModels
 {
@@ -46,7 +45,7 @@ namespace HaroldAdviser.ViewModels
         [JsonProperty(PropertyName = "sender")]
         public Sender Sender { get; set; }
 
-        public string CloneUrl => Commits.Last().Url;
+        public string CloneUrl => Repository.CloneUrl;
 
         public string HtmlUrl => Repository.HtmlUrl;
     }

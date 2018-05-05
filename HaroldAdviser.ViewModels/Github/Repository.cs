@@ -11,7 +11,7 @@ namespace HaroldAdviser.ViewModels.Github
         public string Name { get; set; }
 
         [JsonProperty(PropertyName = "full_name")]
-        public string Compare { get; set; }
+        public string FullName { get; set; }
 
         [JsonProperty(PropertyName = "owner")]
         public Credential Owner { get; set; }

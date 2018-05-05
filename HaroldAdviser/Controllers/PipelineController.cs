@@ -15,7 +15,7 @@ namespace HaroldAdviser.Controllers
             _pipelineManager = pipelineManager;
         }
 
-        [HttpPost, Route("Api/Pipeline/Create")]
+        [HttpPost, Route("/Api/Pipeline/Create")]
         public async Task<IActionResult> CreatePipeline([FromBody] GithubWebhook webhook)
         {
             var result = await _pipelineManager.CreatePipelineAsync(webhook);
@@ -28,14 +28,14 @@ namespace HaroldAdviser.Controllers
             return BadRequest(result.Error);
         }
 
-        [HttpPost, Route("Api/Pipeline/Close/{pipelineId}")]
+        [HttpPost, Route("/Api/Pipeline/Close/{pipelineId}")]
         public async Task<IActionResult> ClosePipeline([FromRoute] Guid pipelineId, PipelineResult model)
         {
             await _pipelineManager.ClosePipelineAsync(pipelineId, model);
             return Ok();
         }
 
-        [HttpPost, Route("Api/Pipeline/Start/{pipelineId}")]
+        [HttpPost, Route("/Api/Pipeline/Start/{pipelineId}")]
         public async Task<IActionResult> StartPipeline([FromRoute] Guid pipelineId)
         {
             var result = await _pipelineManager.StartPipelineAsync(pipelineId);

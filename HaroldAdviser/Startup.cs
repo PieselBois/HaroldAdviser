@@ -122,10 +122,8 @@ namespace HaroldAdviser
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //TODO: add env.IsDevelopment in production
+            app.UseDeveloperExceptionPage();
 
             app.UseStaticFiles();
 
