@@ -20,5 +20,7 @@ namespace HaroldAdviser.Data
         public virtual List<Warning> Warnings { get; set; }
 
         public virtual Repository Repository { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

@@ -30,13 +30,14 @@ namespace HaroldAdviser.BL
                 return new Result("Repository not found.");
             }
 
-            var pipeline = new Pipeline
+            var pipeline = new Data.Pipeline
             {
                 CloneUrl = webhook.CloneUrl,
                 Status = PipelineStatus.New,
                 Repository = repository,
                 Logs = new List<Log>(),
-                Warnings = new List<Warning>()
+                Warnings = new List<Warning>(),
+                Date = DateTime.UtcNow
             };
 
             pipeline.Logs.Add(new Log
