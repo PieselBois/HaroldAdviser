@@ -1,23 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace HaroldAdviser.Migrations
 {
-    public partial class AddDateToPipeline : Migration
+    public partial class AddCommitIdToPipeline : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<DateTime>(
-                name: "Date",
+            migrationBuilder.AddColumn<string>(
+                name: "CommitId",
                 table: "Pipelines",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Date",
+                name: "CommitId",
                 table: "Pipelines");
         }
     }
