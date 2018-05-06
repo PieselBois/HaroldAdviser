@@ -18,5 +18,8 @@ namespace HaroldAdviser.ViewModels
 
         [JsonProperty(PropertyName = "status")]
         public PipelineStatus Status { get; set; }
+      
+        [JsonProperty(PropertyName = "commit_id")]
+        public string CommitId { get; set; }
     }
 }

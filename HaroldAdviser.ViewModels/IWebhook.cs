@@ -5,5 +5,7 @@
         string CloneUrl { get; }
 
         string HtmlUrl { get; }
+
+        string CommitId { get; }
     }
 }

@@ -22,5 +22,7 @@ namespace HaroldAdviser.Data
         public virtual Repository Repository { get; set; }
 
         public DateTime Date { get; set; }
+
+        public string CommitId { get; set; }
     }
 }

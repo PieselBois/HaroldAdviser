@@ -37,7 +37,8 @@ namespace HaroldAdviser.BL
                 Repository = repository,
                 Logs = new List<Log>(),
                 Warnings = new List<Warning>(),
-                Date = DateTime.UtcNow
+                Date = DateTime.UtcNow,
+                CommitId = webhook.CommitId
             };
 
             pipeline.Logs.Add(new Log

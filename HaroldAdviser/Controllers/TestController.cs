@@ -57,7 +57,13 @@ namespace HaroldAdviser.Controllers
         public async Task<IActionResult> GetPipelineAsync()
         {
             var pipeline = await _context.Pipelines.Include(r => r.Repository)
-                .OrderByDescending(r => r.Date).LastAsync();
+                .OrderByDescending(r => r.Date).Where(r => r.Status == 0)
+                .LastOrDefaultAsync();
+
+            if (pipeline == null)
+            {
+                return NotFound();
+            }
 
             pipeline.Status = PipelineStatus.Started;
 
@@ -68,7 +74,8 @@ namespace HaroldAdviser.Controllers
                 Id = pipeline.Id,
                 Url = pipeline.CloneUrl,
                 Date = pipeline.Date,
-                Status = pipeline.Status
+                Status = pipeline.Status,
+                CommitId = pipeline.CommitId
             });
         }
     }
