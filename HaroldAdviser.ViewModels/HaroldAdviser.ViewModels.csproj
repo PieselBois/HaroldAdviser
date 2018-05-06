@@ -5,4 +5,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HaroldAdviser.Data\HaroldAdviser.Data.csproj" />
+  </ItemGroup>
 </Project>

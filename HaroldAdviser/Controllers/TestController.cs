@@ -1,6 +1,8 @@
 ﻿using HaroldAdviser.BL;
 using HaroldAdviser.Data;
+using HaroldAdviser.Data.Enums;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -49,6 +51,25 @@ namespace HaroldAdviser.Controllers
                 Value = r.Value,
                 Id = r.Id
             }));
+        }
+
+        [HttpGet, Route("/Api/Pipeline/Get")]
+        public async Task<IActionResult> GetPipelineAsync()
+        {
+            var pipeline = await _context.Pipelines.Include(r => r.Repository)
+                .OrderByDescending(r => r.Date).LastAsync();
+
+            pipeline.Status = PipelineStatus.Started;
+
+            await _context.SaveChangesAsync();
+
+            return Json(new ViewModels.Pipeline
+            {
+                Id = pipeline.Id,
+                Url = pipeline.CloneUrl,
+                Date = pipeline.Date,
+                Status = pipeline.Status
+            });
         }
     }
 }
